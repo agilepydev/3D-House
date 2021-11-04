@@ -8,7 +8,7 @@ program. The task here is to build a solution
 with the data of LIDAR PLANES, active in the Geospatial industry 
 to model a house in 3D with only a home address.
 
-![Real Estate!](https://user-images.githubusercontent.com/90683636/140307269-092186fb-f23c-4114-9ad4-9178ec76237f.png)
+![building!](https://user-images.githubusercontent.com/90683636/140307269-092186fb-f23c-4114-9ad4-9178ec76237f.png)
 
 
 ## Objectives
@@ -27,7 +27,7 @@ Consolidate the knowledge in Python, specifically in:
 * README.md -> Explains the project.
 * requirements.txt -> Shows information on what libraries and oython version to install/use.
 * main.py -> The main file that runs the program.
-* Scrape DSM & DTM.ipynb -> A shortcut to install and save the DSM & DTM in the correct way.
+* shortcut.ipynb -> A shortcut to install and save the DSM & DTM in the correct way.
 
 
 ## Installation
@@ -41,7 +41,7 @@ Links to install the DSM and DTM:
 
 The files need to be saved in chronological order,
 an easy way of installing the files is by scraping them and saving them automatically using 
-my code that you can find back in the Scrape DSM & DTM.ipynb file.
+my code that you can find back in the shortcut.ipynb file.
 
 In the requirements.txt file you can find all the necessary libraries to install and what python version to use.
 
