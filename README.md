@@ -47,7 +47,7 @@ In the requirements.txt file you can find all the necessary libraries to install
 
 ## Usage
 
-By running the main.py file you're able to run the entire program if the installation is done correctly, 
+By running the main.py file you're able to run the entire program if the installation is done correctly. 
 Give the program an address of a certain building you want to see the plot of and click enter. If your IDE is having issues running the program try running it on the command terminal.
 After closing the first plot, a second plot will be shown, it's up to you wich one you prefer.
 
