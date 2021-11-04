@@ -25,7 +25,7 @@ Consolidate the knowledge in Python, specifically in:
 ## Repo architecture
 
 * README.md -> Explains the project.
-* requirements.txt -> Shows information on what libraries and oython version to install/use.
+* requirements.txt -> Shows information on what libraries and python version to install/use.
 * main.py -> The main file that runs the program.
 * shortcut.ipynb -> A shortcut to install and save the DSM & DTM in the correct way.
 
