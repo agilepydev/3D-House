@@ -21,9 +21,11 @@ import shapefile
 
 # Using an API to get the coordinates
 
-address = "Wapper 9 2000 Antwerpen"
+address = input("Give an address: ")
+
 
 def get_coordinates(address: str):
+    
     req = requests.get(f"https://loc.geopunt.be/v4/Location?q={address}").json()
     info = {'address' : address, 
                 'x_value' : req['LocationResult'][0]['Location']['X_Lambert72'],
@@ -41,6 +43,7 @@ def get_coordinates(address: str):
     build = requests.get(building['gebouw']['detail']).json()
     info['polygon'] = [build['geometriePolygoon']['polygon']["coordinates"]]
     return info
+
 info = get_coordinates(address)
 
 
@@ -58,8 +61,10 @@ bounds = pd.read_csv(path)
 # For DSM
 
 def find_coordinates_DSM():
+    
     x = info["x_value"]
     y = info["y_value"]
+    
     for num in range (0, 42+1):
         left_bounds = bounds.left[num]
         right_bounds = bounds.right[num]
@@ -76,10 +81,12 @@ DSM_tif = find_coordinates_DSM()
 # For DTM
 
 def find_coordinates_DTM():
+    
     x = info["x_value"]
     y = info["y_value"]
     
     for num in range (0, 42+1):
+        
         left_bounds = bounds.left[num]
         right_bounds = bounds.right[num]
         top_bounds = bounds.top[num]
@@ -98,6 +105,7 @@ polygon = info["polygon"]
 # Make the shapefile
 
 def make_shapefile():
+    
     write = shapefile.Writer("shapefiles/test/polygon")
     write.field("name", "C")
     write.poly([polygon[0][0]])
@@ -114,6 +122,7 @@ polygon_path = "/home/becode/3D-House/3D-House-Project/shapefiles/test/polygon.s
 # Clip DSM
 
 def clip_DSM():
+    
     OutTile = gdal.Warp("/home/becode/3D-House/3D-House-Project/shapefiles/test/DSM_clip2.tif", 
                     DSM_tif, 
                     cutlineDSName=polygon_path,
@@ -129,6 +138,7 @@ DSM_clip = clip_DSM()
 # Clip DTM
 
 def clip_DTM():
+    
     OutTile_2 = gdal.Warp("/home/becode/3D-House/3D-House-Project/shapefiles/test/DTM_clip2.tif", 
                           DTM_tif, 
                           cutlineDSName=polygon_path,
@@ -150,10 +160,11 @@ image = DSM_clip - DTM_clip
 # Clean the CHM by turning the NaN into zeros
 
 def clean_image():
+    
     new_image = np.where(np.isnan(image), 0, image)
-    #print(new_image)
     image_2 = np.pad(new_image[0], pad_width = 1, mode ="constant", constant_values = 0)
     return image_2
+
 image_2 = clean_image()
 
 
@@ -169,14 +180,26 @@ def show_imageshape():
     
     ax = fig.add_subplot(projection="3d")
     ax.plot_surface(x, y, image_2)
-    ax.set_zlim(0, 40)
+    ax.set_zlim(0, 31)
     
-    plt.title("3D Building")
-    plt.xlabel(f"max value of x = {x.max()}m")
-    plt.ylabel(f"max value of y = {y.max()}m")
+    # Add some info
+    
+    ax.set_title(f"3D Building of {address}")
+    ax.text2D(0.05, 0.95, f"Area = {int(x.max()*y.max())}m²", transform=ax.transAxes)
+    ax.set_xlabel(f"Width = {x.max()}m")
+    ax.set_ylabel(f"Length = {y.max()}m")
+    ax.set_zlabel(f"Height = {int(image_2.max())}m")
+    
     plt.show()
     
+    # Figure 2
+    
     fig = go.Figure(data=[go.Surface(z=image_2, x=x, y=y)])
+    fig.update_layout(scene = dict(xaxis_title = f"Width = {x.max()}m",
+                                  yaxis_title = f"Length = {y.max()}m",
+                                  zaxis_title = f"Height = {int(image_2.max())}m"))
+   
+    
     fig.show()
 
 show_imageshape()
