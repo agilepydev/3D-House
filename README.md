@@ -41,7 +41,7 @@ Links to install the DSM and DTM:
 
 The files need to be saved in chronological order,
 an easy way of installing the files is by scraping them and saving them automatically using 
-my code that you can find back in the Scrape DSM & DTM.ipynb file.
+my code that you can find back in the Scrape shortcut.ipynb file.
 
 In the requirements.txt file you can find all the necessary libraries to install and what python version to use.
 
