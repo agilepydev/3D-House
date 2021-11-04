@@ -1,3 +1,12 @@
 shapefiles/
+
 Data
+
 .ipynb_checkpoints/
+
+ALL_BOUNDS.csv 
+CHM.ipynb
+Crop building (other way).ipynb
+Crop building from tiff(one way).ipynb
+DSM GeoTiff.ipynb
+DTM Geotiff.ipynb 
