@@ -1,4 +1,17 @@
-shapefiles/test
+shapefiles/
+
 Data
-/.ipynb_checkpoints
-.ipynb_checkpoints
+
+.ipynb_checkpoints/
+
+ALL_BOUNDS.csv 
+CHM.ipynb
+Crop building (other way).ipynb
+Crop building from tiff(one way).ipynb
+DSM GeoTiff.ipynb
+DTM Geotiff.ipynb 
+Extra notes.ipynb
+Open Shapefiles.ipynb
+Open all files and save to dataframe.ipynb
+api coordinates-Copy1.ipynb
+api coordinates.ipynb 
